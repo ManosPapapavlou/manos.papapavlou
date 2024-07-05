@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Σύνθετα Υλικά-Υφάσματα</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fdfeff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #dbe8ec;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table td {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Σύνθετα Ελάσματα</h1>
+    <div class="container">
+        <h2>Material Characteristics</h2>
+        <form id="composite-form" class="row">
+            <div class="form-group col-md-6">
+                <label for="fc">Αντοχή Σκυροδέματος Fc (MPa):</label>
+                <select class="form-control" id="fc" name="fc">
+                    <option>12</option>
+                    <option selected>16</option>
+                    <option>20</option>
+                    <option>25</option>
+                    <option>30</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fctm">Εφελκυστική Αντοχή Σκυροδέματος Fc (MPa):</label>
+                <select class="form-control" id="fctm" name="fctm">
+                    <option>1.6</option>
+                    <option selected>1.9</option>
+                    <option>2.2</option>
+                    <option>2.6</option>
+                    <option>2.9</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="gc">Συντελεστής ασφαλείας Σκυροδέματος:</label>
+                <input type="number" class="form-control" name="gc" id="gc" value="1.5">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fs">Αντοχή Χάλυβα fs:</label>
+                <input type="number" class="form-control" id="fs" name="fs" value="400">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="gs">Συντελεστής ασφαλείας Χάλυβα:</label>
+                <input type="number" class="form-control" id="gs" name="gs" value="1.15">
+            </div>
+        </form>
+
+        <h2>Section Characteristics</h2>
+        <form id="composite-form" class="row">
+            <div class="form-group col-md-6">
+                <label for="b">πλάτος δοκού b (m):</label>
+                <input type="number" class="form-control" id="b" name="b" value="0.25">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="h">Ύψος δοκού h (m):</label>
+                <input type="number" class="form-control" id="h" name="h" value="0.5">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="d1">Επικάλυψη εφελκυόμενης ίνας (m):</label>
+                <input type="number" class="form-control" id="d1" name="d1" value="0.025">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="d2">Επικάλυψη θλιβόμενης ίνας (m):</label>
+                <input type="number" class="form-control" id="d2" name="d2" value="0.025">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="a_s1">Πλήθος Εφελκυόμενων Σιδήρων: </label>
+                <input type="number" class="form-control" id="a_s1" name="a_s1" value="4">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="s1">Διάμετρος Εφελκυόμενων Σιδήρων: </label>
+                <input type="number" class="form-control" id="s1" name="s1" value="16">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="a_s2">Πλήθος Θλιβόμενων Σιδήρων:</label>
+                <input type="number" class="form-control" id="a_s2" name="a_s2" value="2">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="s2">Διάμετρος Θλιβόμενων Σιδήρων:</label>
+                <input type="number" class="form-control" id="s2" name="s2" value="8">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="o_d">Οπλισμός δίατμησης (mm):</label>
+                <input type="number" class="form-control" id="o_d" name="o_d" value="8">
+            </div>
+        </form>
+        <h2>Composite Material Reinforcement Details</h2>
+        <form id="composite-form" class="row">
+            <div class="form-group col-md-6">
+                <label for="bapoko">Πλάτος αποκόλλησης (*πλάτος πλακοδοκού αν είναι άνω παρειά) (m):</label>
+                <input type="number" class="form-control" id="bapoko" name="bapoko" value="0.25">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="bj">Πλάτος Ελάσματος (m):</label>
+                <input type="number" class="form-control" id="bj" name="bj" value="0.2">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Ej">Μέτρο Ελαστηκότητας Ελάσματος (MPa):</label>
+                <input type="number" class="form-control" id="Ej" name="Ej" value="240000">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="gj">Συντελεστής Ασφαλείας Σ.Υ:</label>
+                <input type="number" class="form-control" id="gj" name="gj" value="1.2">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="gm">Συντελεστής Ασφαλείας Προσπελασιμότητας (Κανονική:1.05/ Μειωμένη:1.2):</label>
+                <input type="number" class="form-control" id="gm" name="gm" value="1.05">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Lav">Διατιθέμενο μήκος αγκύρωσης:</label>
+                <input type="number" class="form-control" id="Lav" name="Lav" value="0.5">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="tjjj">Πάχος Σύνθετου Υλικού (mm):</label>
+                <input type="number" class="form-control" id="tjjj" name="tjjj" value="0.164">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="calculate()">Calculate</button>
+        </form>
+        <div id="results" class="mt-4"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Fetch and parse input values
+            const fc = parseFloat(document.getElementById('fc').value);
+            const fctm = parseFloat(document.getElementById('fctm').value);
+            const gc = parseFloat(document.getElementById('gc').value);
+            const fs = parseFloat(document.getElementById('fs').value);
+            const gs = parseFloat(document.getElementById('gs').value);
+
+            const b = parseFloat(document.getElementById('b').value);
+            const h = parseFloat(document.getElementById('h').value);
+            const d1 = parseFloat(document.getElementById('d1').value);
+            const d2 = parseFloat(document.getElementById('d2').value);
+            const o_d = parseFloat(document.getElementById('o_d').value);
+            const a_s1 = parseFloat(document.getElementById('a_s1').value);
+            const s1 = parseFloat(document.getElementById('s1').value);
+            const a_s2 = parseFloat(document.getElementById('a_s2').value);
+            const s2 = parseFloat(document.getElementById('s2').value);
+
+            const bapoko = parseFloat(document.getElementById('bapoko').value);
+            const bj = parseFloat(document.getElementById('bj').value);
+            const Ej = parseFloat(document.getElementById('Ej').value);
+            const gj = parseFloat(document.getElementById('gj').value);
+            const gm = parseFloat(document.getElementById('gm').value);
+            const Lav = parseFloat(document.getElementById('Lav').value);
+            const tjjj = parseFloat(document.getElementById('tjjj').value);
+
+            const d = h - d1 - ((o_d + (s1 / 2)) / 1000);
+            const As1 = a_s1 * Math.PI * ((s1 / 10) ** 2) / 4;
+            const As2 = a_s2 * Math.PI * ((s2 / 10) ** 2) / 4;
+            const fcd = 0.85 * fc / gc;
+            const fyd = fs / gs;
+            const elim = fyd / 200;
+            let es1 = elim;
+            const bw = Math.sqrt((2 - bj / bapoko) / (1 + bj / bapoko));
+console.log(As1,As2,bw);
+            // Array of tj values
+            const tjj = [tjjj, (2 * tjjj), (3 * tjjj), (3 * tjjj + 0.70711 * tjjj), (3 * tjjj + 0.70711 * tjjj + 0.6389 * tjjj)];
+console.log(Ej);
+            // Initialize results array
+            let results_enisxushs = [];
+            let bl;
+            // Loop over each tj value
+            for (let i = 0; i < tjj.length; i++) {
+                let tj = tjj[i];
+                let Le = (Math.sqrt(Ej * tj / (2 * fctm))) / 1000; // Effective anchorage length m
+                let l = Lav / Le; // Coefficient λ
+
+                // Coefficient βL
+                
+                if (l < 1) {
+                    bl = l * (2 - l);
+                } else {
+                    bl = 1;
+                }
+
+                let bb = bw * bl; // Coefficient β
+                let sjcrit = (bb * fctm * Le / tj) * 1000; // Critical stress of composite materials MPa
+                let ejcrit = (sjcrit / Ej) * 1000; // Critical strain of composite materials
+
+                let ec = 3.5; // Initial strain of concrete
+                let ej = ejcrit; // Initial strain of composite materials
+                console.log(ej);
+                let arithmos_epanalhpsewn = 1; // Iteration counter
+
+                // Initialize variables for iterative calculations
+                let NN = 10;
+                let hh, x, es1, es2, a, Fcd, Fs1, Fs2, Fj, N, dd;
+
+                // Perform iterative calculations
+                while (NN !== 0) {
+                    hh = h + (tj / (2 * 1000));
+        x = ec * hh / (ej + ec);
+        es1 = (d - x) * ec / x;
+
+        dd = d2 + ((o_d + (s2 / 2)) / 1000);
+        es2 = (x - dd) * ec / x;
+        a = ec > 2 ? (3 * ec - 2) / (3 * ec) : ec * (6 - ec) / 12;
+
+        Fcd = a * x * b * fcd * 1000;
+        Fs1 = es1 >= elim ? As1 * fyd / 10 : As1 * fyd * es1 / (10 * elim);
+        Fs2 = Math.abs(es2) >= elim ? As2 * fyd / 10 : As2 * fyd * es2 / (10 * elim);
+        Fj = Ej * ej * tj * bj * 0.001 / (gj * gm);
+        N = Fcd + Fs2 - Fs1 - Fj;
+
+        if (N > 0.001) {
+            ec -= 0.0001;
+        } else if (N < -0.001) {
+            ej -= 0.0001;
+        } else {
+            NN = 0;
+        }
+
+        arithmos_epanalhpsewn += 1;
+                }
+
+                // Calculate Mrd
+                let Mrd = Fcd * (hh - (a / 2) * x) + Fs2 * (hh - dd) - Fs1 * (hh - d);
+
+                // Format the layer number
+                let Arithmos_strwsewn = `${i + 1}η Στρώση`;
+
+                // Create a result object for the current layer and push it to the results array
+                let result = `
+                    <h3>${Arithmos_strwsewn}</h3>
+                    <p>Mrd: ${Mrd.toFixed(5)} kNm</p>
+                    <p>Fcd: ${Fcd.toFixed(5)} kN/m²</p>
+                    <p>Fs1: ${Fs1.toFixed(5)} kN/m²</p>
+                    <p>Fs2: ${Fs2.toFixed(5)} kN/m²</p>
+                    <p>Fj: ${Fj.toFixed(5)} kN/m²</p>
+                    <p>N: ${N.toFixed(5)} kN/m²</p>
+                    <p>ec: ${ec.toFixed(5)}</p>
+                    <p>es1: ${es1.toFixed(5)}</p>
+                    <p>es2: ${es2.toFixed(5)}</p>
+                    <p>ej: ${ej.toFixed(5)}</p>
+                    <p>sjcrit: ${sjcrit.toFixed(5)} MPa</p>
+                    <p>ejcrit: ${ejcrit.toFixed(5)}</p>
+                    <p>Number of iterations: ${arithmos_epanalhpsewn}</p>
+                    <hr>
+                `;
+                console.log(result);
+                results_enisxushs.push(result); // Push the result object to the results array
+            }
+
+            // Display results in the results div
+            document.getElementById("results").innerHTML = results_enisxushs.join('');
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.2.1/decimal.min.js"></script>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Emmanouil Papapavlou</span></strong>. All Rights Reserved
+        </div>
+    </div>
+</body>
+
+</html>

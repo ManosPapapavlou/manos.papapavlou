@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Section Analysis</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fdfeff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #dbe8ec;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Material Characteristics</h2>
+        <form id="material-properties">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fc">Αντοχή Σκυροδέματος Fc (MPa):</label>
+                    <select class="form-control" id="fc" name="fc">
+                        <option>12</option>
+                        <option >16</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option selected>30</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="gc">gc:</label>
+                    <input type="number" class="form-control" id="gc" value="1.5">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="fs">fs:</label>
+                    <input type="number" class="form-control" id="fs" value="500">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="gs">gs:</label>
+                    <input type="number" class="form-control" id="gs" value="1.15">
+                </div>
+            </div>
+        </form>
+         <!-- Second form -->
+         <h2>Section Characteristics</h2>
+         <form id="section-properties">
+             <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="b">Width of the section b (m):</label>
+                <input type="number" class="form-control" id="b" value="0.35">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="h">Height of the section h (m):</label>
+                <input type="number" class="form-control" id="h" value="0.65">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="c">Cover c (m):</label>
+                <input type="number" class="form-control" id="c" value="0.025">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="synd">Stirrup diameter (mm):</label>
+                <input type="number" class="form-control" id="synd" value="0">
+            </div>
+        </div>
+    </form>
+    <h2>Section Characteristics</h2>
+    <form id="section-properties">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="ar_sid">Number of primary rebars:</label>
+                <input type="number" class="form-control" id="ar_sid" value="2">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="sid">Diameter of primary rebars (mm):</label>
+                <input type="number" class="form-control" id="sid" value="14">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="ar_sid2">Number of secondary rebars:</label>
+                <input type="number" class="form-control" id="ar_sid2" value="2">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="sid2">Diameter of secondary rebars (mm):</label>
+                <input type="number" class="form-control" id="sid2" value="12">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="ar_sid3">Number of tertiary rebars:</label>
+                <input type="number" class="form-control" id="ar_sid3" value="0">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="sid3">Diameter of tertiary rebars (mm):</label>
+                <input type="number" class="form-control" id="sid3" value="12">
+            </div>
+        </div>
+    </form>
+            
+            <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const fc = parseFloat(document.getElementById('fc').value);
+            const gc = parseFloat(document.getElementById('gc').value);
+            const fs = parseFloat(document.getElementById('fs').value);
+            const gs = parseFloat(document.getElementById('gs').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const h = parseFloat(document.getElementById('h').value);
+            const c = parseFloat(document.getElementById('c').value);
+            const ar_sid = parseFloat(document.getElementById('ar_sid').value);
+            let sid = parseFloat(document.getElementById('sid').value); // Convert mm to m
+            const ar_sid2 = parseFloat(document.getElementById('ar_sid2').value);
+            let sid2 = parseFloat(document.getElementById('sid2').value); // Convert mm to m
+            const ar_sid3 = parseFloat(document.getElementById('ar_sid3').value);
+            let sid3 = parseFloat(document.getElementById('sid3').value); // Convert mm to m
+            const synd = parseFloat(document.getElementById('synd').value); // Convert mm to m
+
+            const d = h - (sid / 2000) / 2 - (synd / 1000) - c;
+            const fcd = 0.85 * fc / gc;
+            const fyd = fs / gs;
+            sid = sid / 10;
+            sid2 = sid2 / 10;
+            sid3 = sid3 / 10;
+            const As = ar_sid * Math.PI * Math.pow(sid / 2, 2) + ar_sid2 * Math.PI * Math.pow(sid2 / 2, 2) + ar_sid3 * Math.PI * Math.pow(sid3 / 2, 2);
+            const x = As * fyd / (0.8 * b * fcd * 1000);
+            const z = d - 0.4 * x;
+
+            const Mrd = As * fyd * z / 10;
+            console.log(Mrd, d, fcd, fyd, As, x, z);
+
+            document.getElementById('result').innerHTML = `<p>The moment capacity is ${Mrd.toFixed(2)} kNm</p>`;
+        }
+    </script>
+</body>
+
+</html>
